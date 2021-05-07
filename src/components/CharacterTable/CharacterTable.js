@@ -8,7 +8,7 @@ const CharacterTable = () => {
     const BASE_URL = 'https://swapi.dev/api';
 
     useEffect(() => {
-        getAllCharacters()
+        getAllCharacters();
     },[]);
 
     const getAllCharacters = async () => {
@@ -16,13 +16,27 @@ const CharacterTable = () => {
             url: `${BASE_URL}/people/`,
             method: 'get'
         })
-        setAllCharacters(allCharacters.data.results);
+
+        const allCharactersArray = allCharacters.data.results;
+        const characterArrayWithHomeworld = await Promise.all(allCharactersArray.map(async (character) => {
+            character.homeworld = await getHomeworld(character)
+            return character;
+        }))
+
+        setAllCharacters(characterArrayWithHomeworld)
+
+    }
+
+    const getHomeworld = async (character) => {
+        const homeworldData = await axios({
+            url: character.homeworld,
+            method: 'get'
+        })
+        return homeworldData.data.name
     }
 
     const characterTableRows = () => {
-        console.log(allCharacters)
         const rows = allCharacters.map((character, i) => {
-            console.log(character);
             return (            
                 <tr key={i}>
                     <th>{character.name}</th>
