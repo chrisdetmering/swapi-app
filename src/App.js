@@ -1,12 +1,10 @@
 import './App.css';
+import TitleCard from './components/TitleCard/TitleCard';
 
 function App() {
   return (
     <div className="App">
-      <div class="main-card">
-        <h1>STAR</h1>
-        <h1>WARS</h1>
-      </div>
+      <TitleCard />
     </div>
   );
 }
