@@ -2,6 +2,7 @@
 
 .card{
     background: none;
+    margin-bottom: 20px
 }
 .card-title{
     font-family: 'Kanit', sans-serif;
