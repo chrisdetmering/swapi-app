@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@900&display=swap');
 
 .card{
-    color: white;
-    text-align: center;
+    background: none;
 }
 .card-title{
     font-family: 'Kanit', sans-serif;
@@ -13,13 +12,11 @@
   }
 
 .card-subtitle{
-    color: white;
     font-size: 60px;
-    margin: 0;
-    padding: 0;
     height: 60px;
 }
 
 .card-text{
     font-size: 18px;
 }
+
