@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 
+import './CharacterTable.css';
+
 const CharacterTable = () => {
     const [allCharacters, setAllCharacters] = useState([]);
 
@@ -52,8 +54,8 @@ const CharacterTable = () => {
     }
 
     return (
-        <Table responsive striped bordered variant="light" size="sm" style={{ width: '90vw', margin: 'auto'}}>
-            <thead style={{ cursor: 'pointer'}}>
+        <Table className="character-table" responsive striped bordered variant="light" size="sm">
+            <thead className="table-header">
                 <tr>
                     <th>Name</th>
                     <th>Birth Date</th>
