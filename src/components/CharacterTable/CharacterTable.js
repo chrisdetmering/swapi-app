@@ -22,6 +22,7 @@ const CharacterTable = () => {
         const allCharactersArray = allCharacters.data.results;
         const characterArrayWithHomeworld = await Promise.all(allCharactersArray.map(async (character) => {
             character.homeworld = await getHomeworld(character)
+            character.species = await getSpeciesArray(character)
             return character;
         }))
 
@@ -37,6 +38,24 @@ const CharacterTable = () => {
         return homeworldData.data.name
     }
 
+    const getSpecies = async (speciesURL) => {
+        const species = await axios({
+            url: speciesURL,
+            method: 'get'
+        })
+
+        return species.data
+    }
+
+    const getSpeciesArray = async (character) => {
+        const characterSpecies = await Promise.all(character.species.map(async (speciesURL) => {
+            const species = await getSpecies(speciesURL);
+            return species.name
+        }))
+        
+        return characterSpecies;
+    }
+
     const characterTableRows = () => {
         const rows = allCharacters.map((character, i) => {
             return (            
@@ -46,7 +65,7 @@ const CharacterTable = () => {
                     <th>{character.height}</th>
                     <th>{character.mass}</th>
                     <th>{character.homeworld}</th>
-                    <th>{character.species}</th>
+                    <th>{character.species.toString()}</th>
                 </tr>
             )
         })
