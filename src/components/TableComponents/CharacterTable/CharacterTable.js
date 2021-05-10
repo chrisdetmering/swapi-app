@@ -4,10 +4,8 @@ import axios from 'axios';
 
 import './CharacterTable.css';
 
-const CharacterTable = () => {
+const CharacterTable = (props) => {
     const [allCharacters, setAllCharacters] = useState([]);
-
-    const BASE_URL = 'https://swapi.dev/api';
 
     useEffect(() => {
         getAllCharacters();
@@ -15,7 +13,7 @@ const CharacterTable = () => {
 
     const getAllCharacters = async () => {
         const allCharacters = await axios({
-            url: `${BASE_URL}/people/`,
+            url: props.characterApiUrl,
             method: 'get'
         })
 
