@@ -1,12 +1,12 @@
 import './App.css';
 import TitleCard from './components/TitleCard/TitleCard';
-import CharacterTable from './components/CharacterTable/CharacterTable';
+import TableComponents from './components/TableComponents/TableComponents';
 
 function App() {
   return (
     <div className="App">
       <TitleCard />
-      <CharacterTable />
+      <TableComponents />
     </div>
   );
 }
