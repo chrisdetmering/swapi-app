@@ -9,7 +9,7 @@ const CharacterTable = (props) => {
 
     useEffect(() => {
         getAllCharacters();
-    },[]);
+    },[props.characterApiUrl]);
 
     const getAllCharacters = async () => {
         const allCharacters = await axios({
