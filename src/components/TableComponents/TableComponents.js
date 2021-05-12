@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import CharacterTable from './CharacterTable/CharacterTable';
 import SearchBar from './SearchBar/SearchBar';
+import NextPrevButton from './NextPrevButton/NextPrevButton';
 
 const TableComponents = () => {
     const BASE_URL = 'https://swapi.dev/api/people';
@@ -17,6 +18,7 @@ const TableComponents = () => {
         <div id="table-div">
             <SearchBar updateSearchText={setSearchText} />
             <CharacterTable characterApiUrl={currentApiUrl} />
+            <NextPrevButton />
         </div>
     )
 }
