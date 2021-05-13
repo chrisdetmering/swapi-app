@@ -1,13 +1,14 @@
 #search-div{
     float: right;
     display: flex;
-    margin: 15px 55px;
+    margin: 0 120px 15px 0;
 }
 #searchbar{
-    width: 200px;
+    width: 20vw;
     margin-right: 5px;
 }
 
 #search-button {
     width: 75px;
+    align-items: center;
 }
