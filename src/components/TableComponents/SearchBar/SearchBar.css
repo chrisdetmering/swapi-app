@@ -1,5 +1,13 @@
+#search-div{
+    float: right;
+    display: flex;
+    margin: 15px 55px;
+}
 #searchbar{
     width: 200px;
-    margin: 20px 55px;
-    float: right;
+    margin-right: 5px;
+}
+
+#search-button {
+    width: 75px;
 }

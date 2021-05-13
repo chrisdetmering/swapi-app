@@ -1,15 +1,28 @@
+import {useState} from 'react';
 import Form from 'react-bootstrap/Form';
-import './SearchBar.css'
+import Button from 'react-bootstrap/Button';
+import './SearchBar.css';
 
 const SearchBar = (props) => {
     const BASE_URL = 'https://swapi.dev/api/people';
+    const [searchInput, setSearchInput] = useState("");
 
     const handleChange = (event) => {
-        const searchString = event.target.value.length === 0 ? "" : `?search=${event.target.value}`
-        props.setCurrentApiUrl(`${BASE_URL}/${searchString}`)
+        if(event.target.value.length === 0) props.setCurrentApiUrl(BASE_URL);
+        setSearchInput(event.target.value)
     }
 
-    return <Form.Control id="searchbar" size="sm" type="text" placeholder="Search..." onChange={handleChange} />
+    const handleClick = (event) => {
+        //const searchString = searchInput.length === 0 ? "" : `?search=${searchInput}`
+        props.setCurrentApiUrl(`${BASE_URL}/?search=${searchInput}`)
+    }
+
+    return (
+        <div id="search-div">
+            <Form.Control id="searchbar" size="sm" type="text" placeholder="Search..." onChange={handleChange} />
+            <Button id="search-button" variant="light" size="sm" onClick={handleClick}>Search</Button>
+        </div>
+    )    
 }
 
 export default SearchBar;
