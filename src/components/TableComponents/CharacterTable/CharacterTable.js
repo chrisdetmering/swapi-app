@@ -9,12 +9,12 @@ const CharacterTable = (props) => {
         const rows = props.allCharacters.map((character, i) => {
             return (            
                 <tr key={i}>
-                    <th>{character.name}</th>
-                    <th>{character.birth_year}</th>
-                    <th>{character.height}</th>
-                    <th>{character.mass}</th>
-                    <th>{character.homeworld}</th>
-                    <th>{character.species.toString()}</th>
+                    <td>{character.name}</td>
+                    <td>{character.birth_year}</td>
+                    <td>{character.height}</td>
+                    <td>{character.mass}</td>
+                    <td>{character.homeworld}</td>
+                    <td>{character.species.toString()}</td>
                 </tr>
             )
         })
