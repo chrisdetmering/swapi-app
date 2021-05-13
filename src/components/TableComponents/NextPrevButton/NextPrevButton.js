@@ -12,14 +12,8 @@ const NextPrevButton = (props) => {
     }, [props.nextPageUrl, props.prevPageUrl])
     
     const handleClick = (event) => {
-        if(event.target.id === 'next'){
-            props.setCurrentApiUrl(props.nextPageUrl);
-            return
-        }
-        if(event.target.id === 'prev'){
-            props.setCurrentApiUrl(props.prevPageUrl);
-            return
-        }
+        const url = event.target.id === 'next' ? props.nextPageUrl : props.prevPageUrl;
+        props.setCurrentApiUrl(url);
     }
 
     const setButtonDisabledProperty = () => {
