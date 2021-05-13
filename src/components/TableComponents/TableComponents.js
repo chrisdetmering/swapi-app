@@ -14,50 +14,34 @@ const TableComponents = () => {
 
 
     useEffect(() => {
-        getAllCharacters()
+        updateAllCharacters()
     },[currentApiUrl])
 
-    const getAllCharacters = async () => {
-        const allCharacters = await axios({
-            url: currentApiUrl,
-            method: 'get'
-        })
+    const updateAllCharacters = async () => {
+        setAllCharacters([])
 
-        setNextPageUrl(allCharacters.data.next);
-        setPrevPageUrl(allCharacters.data.previous);
+        const getAllCharactersResponse = await axios.get(currentApiUrl)
+
+        setNextPageUrl(getAllCharactersResponse.data.next);
+        setPrevPageUrl(getAllCharactersResponse.data.previous);
         
-        const allCharactersArray = allCharacters.data.results;
-        const characterArrayWithHomeworld = await Promise.all(allCharactersArray.map(async (character) => {
-            character.homeworld = await getHomeworld(character)
-            character.species = await getSpeciesArray(character)
-            return character;
-        }))
+        getAllCharactersResponse.data.results.forEach(async (character) => {
+            character.homeworld = await getHomeworld(character);
+            character.species = await getSpeciesArray(character);
 
-        setAllCharacters(characterArrayWithHomeworld)
-
+            setAllCharacters(allCharacters => [...allCharacters, character])
+        });
     }
 
     const getHomeworld = async (character) => {
-        const homeworldData = await axios({
-            url: character.homeworld,
-            method: 'get'
-        })
-        return homeworldData.data.name
-    }
-
-    const getSpecies = async (speciesURL) => {
-        const species = await axios({
-            url: speciesURL,
-            method: 'get'
-        })
-
-        return species.data
+        const homeworld = await axios.get(character.homeworld)
+        return homeworld.data.name
     }
 
     const getSpeciesArray = async (character) => {
-        const characterSpecies = await Promise.all(character.species.map(async (speciesURL) => {
-            const species = await getSpecies(speciesURL);
-            return species.name
+        const characterSpecies = await Promise.all(character.species.map(async (speciesUrl) => {
+            const species = await axios.get(speciesUrl);
+            return species.data.name;
         }))
         
         return characterSpecies;
