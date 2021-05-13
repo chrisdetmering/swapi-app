@@ -2,20 +2,23 @@
 
 .card{
     background: none;
-    margin-bottom: 20px
+    margin-bottom: 5px;
+    padding: 0;
+    margin: auto;
+    width: 80vw;
 }
 .card-title{
     font-family: 'Kanit', sans-serif;
-    font-size: 120px;
-    height: 120px;
+    font-size: 20vh;
+    height: 20vh;
   }
 
 .card-subtitle{
-    font-size: 60px;
-    height: 60px;
+    font-size: 10vh;
+    height: 10vh;
 }
 
 .card-text{
-    font-size: 18px;
+    font-size: 3vh;
 }
 
