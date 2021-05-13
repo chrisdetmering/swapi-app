@@ -1,12 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
 .character-table{
-    width: 90vw; 
+    width: 80vw; 
     margin: auto;
     margin-bottom: 20px;
     font-family: 'Open Sans', sans-serif;
 }
 
+th {
+    font-size: 2vh;
+}
+
 td{
-    font-size: 14px;
+    font-size: 2vh;
 }

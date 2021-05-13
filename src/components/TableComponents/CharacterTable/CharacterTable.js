@@ -22,7 +22,7 @@ const CharacterTable = (props) => {
     }
 
     return (
-        <Table className="character-table" responsive striped bordered variant="light" size="sm">
+        <Table className="character-table" hover responsive striped bordered variant="light" size="sm">
             <thead className="table-header">
                 <tr>
                     <th>Name</th>
