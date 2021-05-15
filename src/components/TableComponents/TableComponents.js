@@ -59,9 +59,13 @@ const TableComponents = () => {
         setCurrentApiUrl(prevPageUrl)
     }
 
+    const updateCurrentUrl = (URL) => {
+        setCurrentApiUrl(URL)
+    }
+
     return (
         <div id="table-div">
-            <SearchBar setCurrentApiUrl={setCurrentApiUrl} />
+            <SearchBar updateCurrentUrl={updateCurrentUrl} />
             <CharacterTable allCharacters={allCharacters} />
             <NextPrevButtons nextPage={nextPage}
                             prevPage={prevPage}
