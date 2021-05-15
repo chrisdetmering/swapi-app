@@ -6,7 +6,7 @@ import NextPrevButtons from './NextPrevButtons/NextPrevButtons';
 import axios from 'axios';
 
 const TableComponents = () => {
-    const BASE_URL = 'https://swapi.dev/api/people';
+    const BASE_URL = 'https://swapi.dev/api/people/';
     const [currentApiUrl, setCurrentApiUrl] = useState(BASE_URL);
     const [allCharacters, setAllCharacters] = useState([]);
     const [nextPageUrl, setNextPageUrl] = useState(null);
@@ -19,6 +19,7 @@ const TableComponents = () => {
     },[currentApiUrl])
 
     const updateAllCharacters = async () => {
+        console.log(currentApiUrl)
         const getAllCharactersResponse = await axios.get(currentApiUrl)
 
         setNextPageUrl(getAllCharactersResponse.data.next);
