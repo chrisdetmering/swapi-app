@@ -4,16 +4,16 @@ import Button from 'react-bootstrap/Button';
 import './SearchBar.css';
 
 const SearchBar = (props) => {
-    const BASE_URL = 'https://swapi.dev/api/people';
+    const BASE_URL = 'https://swapi.dev/api/people/';
     const [searchInput, setSearchInput] = useState("");
 
     const handleChange = (event) => {
-        if(event.target.value.length === 0) props.updateCurrentUrl(BASE_URL);
+        if(event.target.value.length === 0) props.updateCurrentUrl("");
         setSearchInput(event.target.value)
     }
 
     const handleClick = (event) => {
-        props.updateCurrentUrl(`${BASE_URL}/?search=${searchInput}`)
+        props.updateCurrentUrl(`?search=${searchInput}`)
     }
 
     return (

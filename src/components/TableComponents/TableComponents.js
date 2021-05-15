@@ -59,8 +59,8 @@ const TableComponents = () => {
         setCurrentApiUrl(prevPageUrl)
     }
 
-    const updateCurrentUrl = (URL) => {
-        setCurrentApiUrl(URL)
+    const updateCurrentUrl = (queryParameters) => {
+        setCurrentApiUrl(BASE_URL + queryParameters);
     }
 
     return (
