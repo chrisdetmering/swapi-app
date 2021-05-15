@@ -8,13 +8,12 @@ const SearchBar = (props) => {
     const [searchInput, setSearchInput] = useState("");
 
     const handleChange = (event) => {
-        if(event.target.value.length === 0) props.setCurrentApiUrl(BASE_URL);
+        if(event.target.value.length === 0) props.updateCurrentUrl(BASE_URL);
         setSearchInput(event.target.value)
     }
 
     const handleClick = (event) => {
-        //const searchString = searchInput.length === 0 ? "" : `?search=${searchInput}`
-        props.setCurrentApiUrl(`${BASE_URL}/?search=${searchInput}`)
+        props.updateCurrentUrl(`${BASE_URL}/?search=${searchInput}`)
     }
 
     return (
