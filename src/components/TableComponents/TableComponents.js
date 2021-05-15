@@ -20,7 +20,9 @@ const TableComponents = () => {
 
     const updateAllCharacters = async () => {
         console.log(currentApiUrl)
-        const getAllCharactersResponse = await axios.get(currentApiUrl)
+        const getAllCharactersResponse = await axios.get(currentApiUrl, {
+            headers: {"Access-Control-Allow-Origin":"*"}
+        })
 
         setNextPageUrl(getAllCharactersResponse.data.next);
         setPrevPageUrl(getAllCharactersResponse.data.previous);
@@ -34,13 +36,17 @@ const TableComponents = () => {
     }
 
     const getHomeworld = async (character) => {
-        const homeworld = await axios.get(character.homeworld)
+        const homeworld = await axios.get(character.homeworld, {
+            headers: {"Access-Control-Allow-Origin":"*"}
+        })
         return homeworld.data.name
     }
 
     const getSpeciesArray = async (character) => {
         const characterSpecies = await Promise.all(character.species.map(async (speciesUrl) => {
-            const species = await axios.get(speciesUrl);
+            const species = await axios.get(speciesUrl, {
+                headers: {"Access-Control-Allow-Origin":"*"}
+            });
             return species.data.name;
         }))
         
