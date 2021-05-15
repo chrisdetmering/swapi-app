@@ -6,7 +6,7 @@ import './CharacterTable.css';
 const CharacterTable = (props) => {
 
     const characterTableRows = () => {
-        const rows = props.allCharacters.map((character, i) => {
+        const populatedRows = props.allCharacters.map((character, i) => {
             return (            
                 <tr key={i}>
                     <td>{character.name}</td>
@@ -18,7 +18,7 @@ const CharacterTable = (props) => {
                 </tr>
             )
         })
-        return rows;
+        return populatedRows;
     }
 
     return (
