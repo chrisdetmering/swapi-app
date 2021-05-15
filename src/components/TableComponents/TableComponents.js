@@ -19,7 +19,6 @@ const TableComponents = () => {
     },[currentApiUrl])
 
     const updateAllCharacters = async () => {
-        console.log(currentApiUrl)
         const getAllCharactersResponse = await axios.get(currentApiUrl)
 
         setNextPageUrl(getAllCharactersResponse.data.next);
@@ -34,17 +33,22 @@ const TableComponents = () => {
     }
 
     const getHomeworld = async (character) => {
-        const homeworld = await axios.get(character.homeworld)
+        const homeworld = await axios.get(convertHTTPtoHTTPS(character.homeworld))
         return homeworld.data.name
     }
 
     const getSpeciesArray = async (character) => {
         const characterSpecies = await Promise.all(character.species.map(async (speciesUrl) => {
-            const species = await axios.get(speciesUrl);
+            const species = await axios.get(convertHTTPtoHTTPS(speciesUrl));
             return species.data.name;
         }))
         
         return characterSpecies;
+    }
+
+    const convertHTTPtoHTTPS = (URL) => {
+        const separatedHTTP = URL.split(":")
+        return `https:${separatedHTTP[1]}`
     }
 
     const nextPage = () => {
