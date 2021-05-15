@@ -4,7 +4,7 @@ This project uses [Create React App](https://github.com/facebook/create-react-ap
 
 View the live version [here!](https://swapi-app-53990.herokuapp.com/)
 
-![]('./screenshot.PNG')
+![](./screenshot.PNG)
 
 ## Running Locally
 
