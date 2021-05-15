@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import CharacterTable from './CharacterTable/CharacterTable';
 import SearchBar from './SearchBar/SearchBar';
-import NextPrevButton from './NextPrevButton/NextPrevButton';
+import NextPrevButtons from './NextPrevButtons/NextPrevButtons';
 
 import axios from 'axios';
 
@@ -14,11 +14,11 @@ const TableComponents = () => {
 
 
     useEffect(() => {
+        setAllCharacters([])
         updateAllCharacters();
     },[currentApiUrl])
 
     const updateAllCharacters = async () => {
-        setAllCharacters([])
         const getAllCharactersResponse = await axios.get(currentApiUrl)
 
         setNextPageUrl(getAllCharactersResponse.data.next);
@@ -48,19 +48,17 @@ const TableComponents = () => {
 
     const nextPage = () => {
         setCurrentApiUrl(nextPageUrl);
-        console.log("Next Page: " + nextPageUrl)
     }
 
     const prevPage = () => {
         setCurrentApiUrl(prevPageUrl)
-        console.log("Prev Page: " + prevPageUrl)
     }
 
     return (
         <div id="table-div">
             <SearchBar setCurrentApiUrl={setCurrentApiUrl} />
             <CharacterTable allCharacters={allCharacters} />
-            <NextPrevButton nextPage={nextPage}
+            <NextPrevButtons nextPage={nextPage}
                             prevPage={prevPage}
                             nextPageUrl={nextPageUrl} 
                             prevPageUrl={prevPageUrl} />
