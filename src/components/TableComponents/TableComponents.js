@@ -19,7 +19,7 @@ const TableComponents = () => {
     },[currentApiUrl])
 
     const updateAllCharacters = async () => {
-        const getAllCharactersResponse = await axios.get(currentApiUrl)
+        const getAllCharactersResponse = await axios.get(convertHTTPtoHTTPS(currentApiUrl))
 
         setNextPageUrl(getAllCharactersResponse.data.next);
         setPrevPageUrl(getAllCharactersResponse.data.previous);
@@ -33,7 +33,7 @@ const TableComponents = () => {
     }
 
     const getHomeworld = async (character) => {
-        const homeworld = await axios.get(convertHTTPtoHTTPS(character.homeworld))
+        const homeworld = await axios.get(convertHTTPtoHTTPS(character.homeworld));
         return homeworld.data.name
     }
 
