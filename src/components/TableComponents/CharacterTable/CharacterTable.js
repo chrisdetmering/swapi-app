@@ -3,18 +3,18 @@ import Table from 'react-bootstrap/Table';
 
 import './CharacterTable.css';
 
-const CharacterTable = (props) => {
+const CharacterTable = ({ allCharacters }) => {
 
     const characterTableRows = () => {
-        const populatedRows = props.allCharacters.map((character, i) => {
-            return (            
+        const populatedRows = allCharacters.map((character, i) => {
+            return (
                 <tr key={i}>
                     <td>{character.name}</td>
                     <td>{character.birth_year}</td>
                     <td>{character.height}</td>
                     <td>{character.mass}</td>
                     <td>{character.homeworld}</td>
-                    <td>{character.species.toString()}</td>
+                    <td>{character.species}</td>
                 </tr>
             )
         })

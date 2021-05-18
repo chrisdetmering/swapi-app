@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import CharacterTable from './CharacterTable/CharacterTable';
 import SearchBar from './SearchBar/SearchBar';
 import NextPrevButtons from './NextPrevButtons/NextPrevButtons';
-
 import axios from 'axios';
 
 const TableComponents = () => {
@@ -14,22 +13,22 @@ const TableComponents = () => {
 
 
     useEffect(() => {
-        setAllCharacters([])
         updateAllCharacters();
-    },[currentApiUrl])
+    }, [currentApiUrl])
 
     const updateAllCharacters = async () => {
-        const getAllCharactersResponse = await axios.get(convertHTTPtoHTTPS(currentApiUrl))
+        const getAllCharactersResponse = await axios.get(currentApiUrl)
 
         setNextPageUrl(getAllCharactersResponse.data.next);
         setPrevPageUrl(getAllCharactersResponse.data.previous);
-        
-        getAllCharactersResponse.data.results.forEach(async (character) => {
-            character.homeworld = await getHomeworld(character);
-            character.species = await getSpeciesArray(character);
 
-            setAllCharacters(allCharacters => [...allCharacters, character])
-        });
+        const result = Promise.all(getAllCharactersResponse.data.results.map(async (character) => {
+            character.homeworld = await getHomeworld(character);
+            character.species = await getSpecies(character);
+            return character;
+        }));
+        const characters = await result;
+        setAllCharacters(characters);
     }
 
     const getHomeworld = async (character) => {
@@ -37,19 +36,18 @@ const TableComponents = () => {
         return homeworld.data.name
     }
 
-    const getSpeciesArray = async (character) => {
+    const getSpecies = async (character) => {
+        if (character.species.length === 0) return "Human";
+
         const characterSpecies = await Promise.all(character.species.map(async (speciesUrl) => {
             const species = await axios.get(convertHTTPtoHTTPS(speciesUrl));
             return species.data.name;
         }))
-        
-        return characterSpecies;
+
+        return characterSpecies[0];
     }
 
-    const convertHTTPtoHTTPS = (URL) => {
-        const separatedHTTP = URL.split(":")
-        return `https:${separatedHTTP[1]}`
-    }
+    const convertHTTPtoHTTPS = (URL) => URL.replace("http", "https");
 
     const nextPage = () => {
         setCurrentApiUrl(nextPageUrl);
@@ -68,9 +66,9 @@ const TableComponents = () => {
             <SearchBar updateCurrentUrl={updateCurrentUrl} />
             <CharacterTable allCharacters={allCharacters} />
             <NextPrevButtons nextPage={nextPage}
-                            prevPage={prevPage}
-                            nextPageUrl={nextPageUrl} 
-                            prevPageUrl={prevPageUrl} />
+                prevPage={prevPage}
+                nextPageUrl={nextPageUrl}
+                prevPageUrl={prevPageUrl} />
         </div>
     )
 }
